@@ -1,7 +1,6 @@
 # Objective-C-Coding-Style
 ## 目录
 
-* [语言](#language)
 * [代码组织](#code-organization)
 * [空格](#spacing)
 * [注释](#comments)
@@ -31,23 +30,6 @@
 * [单例模式](#singletons)
 * [换行符](#line-breaks)
 * [Xcode工程](#xcode-project)
-
-<b id="language"></b>
-## 语言
-
-应该使用US英语.
-
-**应该:**
-
-```objc
-UIColor *myColor = [UIColor whiteColor];
-```
-
-**不应该:**
-
-```objc
-UIColor *myColour = [UIColor whiteColor];
-```
 
 <b id="code-organization"></b>
 ## 代码组织
