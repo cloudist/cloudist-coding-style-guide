@@ -8,6 +8,10 @@
 * [命名](#naming)
   * [下划线](#underscores)
 * [方法](#methods)
+* [方法调用](#methodscall)
+* [@public和@private标记符](#public&private)
+* [协议](#Protocols)
+* [闭包](#Blocks)
 * [变量](#variables)
 * [属性特性](#property-attributes)
 * [点符号语法](#dot-notation-syntax)
@@ -227,7 +231,6 @@ id varnm;
 - (instancetype)initWithWidth:(CGFloat)width andHeight:(CGFloat)height;
 - (instancetype)initWith:(int)width and:(int)height;  // Never do this.
 ```
-<b id="variables"></b>
 
 一个典型的Objective-C函数应该是这样的：
 
@@ -265,6 +268,7 @@ id varnm;
     ...
 }
 ```
+<b id="methodscall"></b>
 ## 方法调用
 
 方法调用的格式和书写差不多，可以按照函数的长短来选择写在一行或者分成多行：
@@ -299,6 +303,7 @@ id varnm;
           name:arg2
           error:arg3];
 ```
+<b id="public&private"></b>
 ## @public和@private标记符
 
 @public和@private标记符应该以**一个空格**来进行缩进：
@@ -312,6 +317,7 @@ id varnm;
 }
 @end
 ```
+<b id="Protocols"></b>
 ## 协议（Protocols）
 
 在书写协议的时候注意用`<>`括起来的协议和类型名之间是没有空格的，比如`IPCConnectHandler()<IPCPreconnectorDelegate>`,这个规则适用所有书写协议的地方，包括函数声明、类声明、实例变量等等：
@@ -325,7 +331,7 @@ id varnm;
 - (void)setDelegate:(id<MyFancyDelegate>)aDelegate;
 @end
 ```
-
+<b id="Blocks"></b>
 ###闭包（Blocks）
 
 根据block的长度，有不同的书写规则：
@@ -389,7 +395,7 @@ void (^largeBlock)(void) = ^{
         // ...
     }];
 ```
-
+<b id="variables"></b>
 ## 变量
 
 变量尽量以描述性的方式来命名。单个字符的变量命名应该尽量避免，除了在`for()`循环。
