@@ -62,7 +62,7 @@ UIColor *myColour = [UIColor whiteColor];
 - (void)setCustomProperty:(id)value {}
 - (id)customProperty {}
 
-#pragma mark - IBActions/Event Response
+#pragma mark - Action
 - (IBAction)submitData:(id)sender {}
 - (void)someButtonDidPressed:(UIButton*)button
 
@@ -88,7 +88,7 @@ UIColor *myColour = [UIColor whiteColor];
 <b id="spacing"></b>
 ## 空格
 
-* 缩进使用**4**个空格，确保在Xcode偏好设置来设置。(raywenderlich.com使用**2**个空格)
+* 缩进使用**4**个空格，确保在Xcode偏好设置来设置。
 * 方法大括号和其他大括号(`if`/`else`/`switch`/`while` 等.)总是在同一行语句打开但在新行中关闭。
 
 **应该:**
@@ -230,6 +230,168 @@ id varnm;
 - (instancetype)initWith:(int)width and:(int)height;  // Never do this.
 ```
 <b id="variables"></b>
+
+一个典型的Objective-C函数应该是这样的：
+
+```objective-c
+- (void)writeVideoFrameWithData:(NSData *)frameData timeStamp:(int)timeStamp {
+    ...
+}
+```
+
+在`-`和`(void)`之间应该有一个空格，第一个大括号`{`的位置在函数所在行的末尾，同样应该有一个空格。（_我司的C语言规范要求是第一个大括号单独占一行，但考虑到OC较长的函数名和苹果SDK代码的风格，还是将大括号放在行末。_）
+
+如果一个函数有特别多的参数或者名称很长，应该将其按照`:`来对齐分行显示：
+
+```objective-c
+-(id)initWithModel:(IPCModle)model
+       ConnectType:(IPCConnectType)connectType
+        Resolution:(IPCResolution)resolution
+          AuthName:(NSString *)authName
+          Password:(NSString *)password
+               MAC:(NSString *)mac
+              AzIp:(NSString *)az_ip
+             AzDns:(NSString *)az_dns
+             Token:(NSString *)token
+             Email:(NSString *)email
+          Delegate:(id<IPCConnectHandlerDelegate>)delegate;
+```
+
+在分行时，如果第一段名称过短，后续名称可以以Tab的长度（4个空格）为单位进行缩进：
+
+```objective-c
+- (void)short:(GTMFoo *)theFoo
+        longKeyword:(NSRect)theRect
+  evenLongerKeyword:(float)theInterval
+              error:(NSError **)theError {
+    ...
+}
+```
+## 方法调用
+
+方法调用的格式和书写差不多，可以按照函数的长短来选择写在一行或者分成多行：
+
+```objective-c
+//写在一行
+[myObject doFooWith:arg1 name:arg2 error:arg3];
+
+//分行写，按照':'对齐
+[myObject doFooWith:arg1
+               name:arg2
+              error:arg3];
+
+//第一段名称过短的话后续可以进行缩进
+[myObj short:arg1
+          longKeyword:arg2
+    evenLongerKeyword:arg3
+                error:arg4];
+```
+
+以下写法是错误的：
+
+```objective-c
+//错误，要么写在一行，要么全部分行
+[myObject doFooWith:arg1 name:arg2
+              error:arg3];
+[myObject doFooWith:arg1
+               name:arg2 error:arg3];
+
+//错误，按照':'来对齐，而不是关键字
+[myObject doFooWith:arg1
+          name:arg2
+          error:arg3];
+```
+## @public和@private标记符
+
+@public和@private标记符应该以**一个空格**来进行缩进：
+
+```objective-c
+@interface MyClass : NSObject {
+ @public
+  ...
+ @private
+  ...
+}
+@end
+```
+## 协议（Protocols）
+
+在书写协议的时候注意用`<>`括起来的协议和类型名之间是没有空格的，比如`IPCConnectHandler()<IPCPreconnectorDelegate>`,这个规则适用所有书写协议的地方，包括函数声明、类声明、实例变量等等：
+
+```objective-c
+@interface MyProtocoledClass : NSObject<NSWindowDelegate> {
+ @private
+    id<MyFancyDelegate> _delegate;
+}
+
+- (void)setDelegate:(id<MyFancyDelegate>)aDelegate;
+@end
+```
+
+###闭包（Blocks）
+
+根据block的长度，有不同的书写规则：
+
+- 较短的block可以写在一行内。
+- 如果分行显示的话，block的右括号`}`应该和调用block那行代码的第一个非空字符对齐。
+- block内的代码采用**4个空格**的缩进。
+- 如果block过于庞大，应该单独声明成一个变量来使用。
+- `^`和`(`之间，`^`和`{`之间都没有空格，参数列表的右括号`)`和`{`之间有一个空格。
+
+```objective-c
+//较短的block写在一行内
+[operation setCompletionBlock:^{ [self onOperationDone]; }];
+
+//分行书写的block，内部使用4空格缩进
+[operation setCompletionBlock:^{
+    [self.delegate newDataAvailable];
+}];
+
+//使用C语言API调用的block遵循同样的书写规则
+dispatch_async(_fileIOQueue, ^{
+    NSString* path = [self sessionFilePath];
+    if (path) {
+      // ...
+    }
+});
+
+//较长的block关键字可以缩进后在新行书写，注意block的右括号'}'和调用block那行代码的第一个非空字符对齐
+[[SessionService sharedService]
+    loadWindowWithCompletionBlock:^(SessionWindow *window) {
+        if (window) {
+          [self windowDidLoad:window];
+        } else {
+          [self errorLoadingWindow];
+        }
+    }];
+
+//较长的block参数列表同样可以缩进后在新行书写
+[[SessionService sharedService]
+    loadWindowWithCompletionBlock:
+        ^(SessionWindow *window) {
+            if (window) {
+              [self windowDidLoad:window];
+            } else {
+              [self errorLoadingWindow];
+            }
+        }];
+
+//庞大的block应该单独定义成变量使用
+void (^largeBlock)(void) = ^{
+    // ...
+};
+[_operationQueue addOperationWithBlock:largeBlock];
+
+//在一个调用中使用多个block，注意到他们不是像函数那样通过':'对齐的，而是同时进行了4个空格的缩进
+[myObject doSomethingWith:arg1
+    firstBlock:^(Foo *a) {
+        // ...
+    }
+    secondBlock:^(Bar *b) {
+        // ...
+    }];
+```
+
 ## 变量
 
 变量尽量以描述性的方式来命名。单个字符的变量命名应该尽量避免，除了在`for()`循环。
