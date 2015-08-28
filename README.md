@@ -102,31 +102,6 @@ else {
 
 * 在方法之间应该有且只有一行，这样有利于在视觉上更清晰和更易于组织。在方法内的空白应该分离功能，但通常都抽离出来成为一个新方法。
 * 优先使用auto-synthesis。但如果有必要，`@synthesize` 和 `@dynamic`应该在实现中每个都声明新的一行。
-* 应该避免以冒号对齐的方式来调用方法。因为有时方法签名可能有3个以上的冒号和冒号对齐会使代码更加易读。请**不要**这样做，尽管冒号对齐的方法包含代码块，因为Xcode的对齐方式令它难以辨认。
-
-**应该:**
-
-```objc
-// blocks are easily readable
-[UIView animateWithDuration:1.0 animations:^{
-    // something
-} completion:^(BOOL finished) {
-    // something
-}];
-```
-
-**不应该:**
-
-```objc
-// colon-aligning makes the block indentation hard to read
-[UIView animateWithDuration:1.0
-                 animations:^{
-                     // something
-                 }
-                 completion:^(BOOL finished) {
-                     // something
-                 }];
-```
 
 <b id="comments"></b>
 ## 注释
@@ -185,6 +160,7 @@ static NSTimeInterval const fadetime = 1.7;
 ```objc
 id varnm;
 ```
+
 <b id="underscores"></b>
 ### 下划线
 
@@ -196,6 +172,7 @@ id varnm;
 
 <b id="methods"></b>
 ## 方法
+
 <b id="methoddef"></b>
 ### 方法声明与定义
 
@@ -255,6 +232,7 @@ id varnm;
     ...
 }
 ```
+
 <b id="methodscall"></b>
 ### 方法调用
 
@@ -290,6 +268,7 @@ id varnm;
           name:arg2
           error:arg3];
 ```
+
 <b id="public&private"></b>
 ## @public和@private标记符
 
@@ -304,6 +283,7 @@ id varnm;
 }
 @end
 ```
+
 <b id="Protocols"></b>
 ## 协议（Protocols）
 
@@ -318,6 +298,7 @@ id varnm;
 - (void)setDelegate:(id<MyFancyDelegate>)aDelegate;
 @end
 ```
+
 <b id="Blocks"></b>
 ###闭包（Blocks）
 
@@ -382,6 +363,7 @@ void (^largeBlock)(void) = ^{
         // ...
     }];
 ```
+
 <b id="variables"></b>
 ## 变量
 
@@ -391,7 +373,7 @@ void (^largeBlock)(void) = ^{
 
 [私有变量](#private-properties) 应该尽可能代替实例变量的使用。尽管使用实例变量是一种有效的方式，但更偏向于使用属性来保持代码一致性。
 
-通过使用'back'属性(_variable，变量名前面有下划线)直接访问实例变量应该尽量避免，除了在初始化方法(`init`, `initWithCoder:`, 等…)，`dealloc` 方法和自定义的setters和getters。想了解关于如何在初始化方法和dealloc直接使用Accessor方法的更多信息，查看[这里](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)
+通过使用'back'属性(_variable，变量名前面有下划线)直接访问实例变量应该尽量避免，除了在初始化方法(`init`， `initWithCoder:`，等…)，`dealloc` 方法和自定义的setters和getters。想了解关于如何在初始化方法和dealloc直接使用Accessor方法的更多信息，查看[这里](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)
 
 **应该:**
 
@@ -472,7 +454,7 @@ UIApplication.sharedApplication.delegate;
 <b id="literals"></b>
 ## 字面值
 
-`NSString`, `NSDictionary`, `NSArray`, 和 `NSNumber`的字面值应该在创建这些类的不可变实例时被使用。请特别注意`nil`值不能传入`NSArray`和`NSDictionary`字面值，因为这样会导致crash。
+`NSString`，`NSDictionary`，`NSArray`，和 `NSNumber`的字面值应该在创建这些类的不可变实例时被使用。请特别注意`nil`值不能传入`NSArray`和`NSDictionary`字面值，因为这样会导致crash。
 
 **应该:**
 
@@ -491,6 +473,7 @@ NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Ka
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *buildingStreetNumber = [NSNumber numberWithInteger:10018];
 ```
+
 <b id="constants"></b>
 ## 常量
 
@@ -511,6 +494,7 @@ static CGFloat const RWTImageThumbnailHeight = 50.0;
 
 #define thumbnailHeight 2
 ```
+
 <b id="enumerated-types"></b>
 ## 枚举类型
 
@@ -737,7 +721,7 @@ Init方法应该遵循Apple生成代码模板的命名规则。返回类型应�
 <b id="cgrect-functions"></b>
 ## CGRect函数
 
-当访问`CGRect`里的`x`, `y`, `width`, 或 `height`时，应该使用[`CGGeometry`函数](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html)而不是直接通过结构体来访问。引用Apple的`CGGeometry `:
+当访问`CGRect`里的`x`，`y`，`width`，或 `height`时，应该使用[`CGGeometry`函数](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html)而不是直接通过结构体来访问。引用Apple的`CGGeometry `:
 
 > 在这个参考文档中所有的函数，接受CGRect结构体作为输入，在计算它们结果时隐式地标准化这些rectangles。因此，你的应用程序应该避免直接访问和修改保存在CGRect数据结构中的数据。相反，使用这些函数来操纵rectangles和获取它们的特性。
 
