@@ -81,9 +81,9 @@
 
 ```objc
 if (user.isHappy) {
-    //Do something
+    // Do something
 } else {
-    //Do something else
+    // Do something else
 }
 ```
 
@@ -92,10 +92,10 @@ if (user.isHappy) {
 ```objc
 if (user.isHappy)
 {
-  //Do something
+    // Do something
 }
 else {
-  //Do something else
+    // Do something else
 }
 ```
 
@@ -108,9 +108,9 @@ else {
 ```objc
 // blocks are easily readable
 [UIView animateWithDuration:1.0 animations:^{
-  // something
+    // something
 } completion:^(BOOL finished) {
-  // something
+    // something
 }];
 ```
 
@@ -133,6 +133,8 @@ else {
 当需要注释时，注释应该用来解释这段特殊代码**为什么**要这样做。任何被使用的注释都必须保持最新或被删除。
 
 一般都避免使用块注释，因为代码尽可能做到自解释，只有当断断续续或几行代码时才需要注释。*例外：这不应用在生成文档的注释*
+
+双斜线开头的注释, 双斜线要与后面的文字间留有一个空格.  
 
 <b id="naming"></b>
 ## 命名
@@ -207,7 +209,7 @@ id varnm;
 **不应该:**
 
 ```objc
--(void)setT:(NSString *)text i:(UIImage *)image;
+- (void)setT:(NSString *)text i:(UIImage *)image;
 - (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;
 - (id)taggedView:(NSInteger)tag;
 - (instancetype)initWithWidth:(CGFloat)width andHeight:(CGFloat)height;
@@ -256,15 +258,15 @@ id varnm;
 方法调用的格式和书写差不多，可以按照函数的长短来选择写在一行或者分成多行：
 
 ```objective-c
-//写在一行
+// 写在一行
 [myObject doFooWith:arg1 name:arg2 error:arg3];
 
-//分行写，按照':'对齐
+// 分行写，按照':'对齐
 [myObject doFooWith:arg1
                name:arg2
               error:arg3];
 
-//第一段名称过短的话后续可以进行缩进
+// 第一段名称过短的话后续可以进行缩进
 [myObj short:arg1
           longKeyword:arg2
     evenLongerKeyword:arg3
@@ -274,13 +276,13 @@ id varnm;
 以下写法是错误的：
 
 ```objective-c
-//错误，要么写在一行，要么全部分行
+// 错误，要么写在一行，要么全部分行
 [myObject doFooWith:arg1 name:arg2
               error:arg3];
 [myObject doFooWith:arg1
                name:arg2 error:arg3];
 
-//错误，按照':'来对齐，而不是关键字
+// 错误，按照':'来对齐，而不是关键字
 [myObject doFooWith:arg1
           name:arg2
           error:arg3];
@@ -288,14 +290,14 @@ id varnm;
 <b id="public&private"></b>
 ## @public和@private标记符
 
-@public和@private标记符应该以**一个空格**来进行缩进：
+@public和@private标记符应该以**两个空格**来进行缩进：
 
 ```objective-c
 @interface MyClass : NSObject {
- @public
-  ...
- @private
-  ...
+  @public
+    ...
+  @private
+    ...
 }
 @end
 ```
@@ -306,7 +308,7 @@ id varnm;
 
 ```objective-c
 @interface MyProtocoledClass : NSObject<NSWindowDelegate> {
- @private
+  @private
     id<MyFancyDelegate> _delegate;
 }
 
@@ -325,15 +327,15 @@ id varnm;
 - `^`和`(`之间，`^`和`{`之间都没有空格，参数列表的右括号`)`和`{`之间有一个空格。
 
 ```objective-c
-//较短的block写在一行内
+// 较短的block写在一行内
 [operation setCompletionBlock:^{ [self onOperationDone]; }];
 
-//分行书写的block，内部使用4空格缩进
+// 分行书写的block，内部使用4空格缩进
 [operation setCompletionBlock:^{
     [self.delegate newDataAvailable];
 }];
 
-//使用C语言API调用的block遵循同样的书写规则
+// 使用C语言API调用的block遵循同样的书写规则
 dispatch_async(_fileIOQueue, ^{
     NSString* path = [self sessionFilePath];
     if (path) {
@@ -341,34 +343,34 @@ dispatch_async(_fileIOQueue, ^{
     }
 });
 
-//较长的block关键字可以缩进后在新行书写，注意block的右括号'}'和调用block那行代码的第一个非空字符对齐
+// 较长的block关键字可以缩进后在新行书写，注意block的右括号'}'和调用block那行代码的第一个非空字符对齐
 [[SessionService sharedService]
     loadWindowWithCompletionBlock:^(SessionWindow *window) {
         if (window) {
-          [self windowDidLoad:window];
+            [self windowDidLoad:window];
         } else {
-          [self errorLoadingWindow];
+            [self errorLoadingWindow];
         }
     }];
 
-//较长的block参数列表同样可以缩进后在新行书写
+// 较长的block参数列表同样可以缩进后在新行书写
 [[SessionService sharedService]
     loadWindowWithCompletionBlock:
         ^(SessionWindow *window) {
             if (window) {
-              [self windowDidLoad:window];
+                [self windowDidLoad:window];
             } else {
-              [self errorLoadingWindow];
+                [self errorLoadingWindow];
             }
         }];
 
-//庞大的block应该单独定义成变量使用
+// 庞大的block应该单独定义成变量使用
 void (^largeBlock)(void) = ^{
     // ...
 };
 [_operationQueue addOperationWithBlock:largeBlock];
 
-//在一个调用中使用多个block，注意到他们不是像函数那样通过':'对齐的，而是同时进行了4个空格的缩进
+// 在一个调用中使用多个block，注意到他们不是像函数那样通过':'对齐的，而是同时进行了4个空格的缩进
 [myObject doSomethingWith:arg1
     firstBlock:^(Foo *a) {
         // ...
@@ -402,7 +404,7 @@ void (^largeBlock)(void) = ^{
 
 ```objc
 @interface RWTTutorial : NSObject {
-  NSString *tutorialName;
+    NSString *tutorialName;
 }
 ```
 
@@ -515,9 +517,9 @@ static CGFloat const RWTImageThumbnailHeight = 50.0;
 
 ```objc
 typedef NS_ENUM(NSInteger, RWTLeftMenuTopItemType) {
-  RWTLeftMenuTopItemMain,
-  RWTLeftMenuTopItemShows,
-  RWTLeftMenuTopItemSchedule
+    RWTLeftMenuTopItemMain,
+    RWTLeftMenuTopItemShows,
+    RWTLeftMenuTopItemSchedule
 };
 ```
 
@@ -525,10 +527,10 @@ typedef NS_ENUM(NSInteger, RWTLeftMenuTopItemType) {
 
 ```objc
 typedef NS_ENUM(NSInteger, RWTGlobalConstants) {
-  RWTPinSizeMin = 1,
-  RWTPinSizeMax = 5,
-  RWTPinCountMin = 100,
-  RWTPinCountMax = 500,
+    RWTPinSizeMin = 1,
+    RWTPinSizeMax = 5,
+    RWTPinCountMin = 100,
+    RWTPinCountMax = 500,
 };
 ```
 
@@ -538,8 +540,8 @@ typedef NS_ENUM(NSInteger, RWTGlobalConstants) {
 
 ```objc
 enum GlobalConstants {
-  kMaxPinSize = 5,
-  kMaxPinCount = 500,
+    kMaxPinSize = 5,
+    kMaxPinCount = 500,
 };
 ```
 
@@ -550,20 +552,20 @@ enum GlobalConstants {
 
 ```objc
 switch (condition) {
-  case 1:
-    // ...
-    break;
-  case 2: {
-    // ...
-    // Multi-line example using braces
-    break;
-  }
-  case 3:
-    // ...
-    break;
-  default: 
-    // ...
-    break;
+    case 1:
+        // ...
+        break;
+    case 2: {
+        // ...
+        // Multi-line example using braces
+        break;
+    }
+    case 3:
+        // ...
+        break;
+    default: 
+        // ...
+        break;
 }
 
 ```
@@ -572,14 +574,14 @@ switch (condition) {
 
 ```objc
 switch (condition) {
-  case 1:
-    // ** fall-through! **
-  case 2:
-    // code executed for values 1 and 2
-    break;
-  default: 
-    // ...
-    break;
+    case 1:
+        // ** fall-through! **
+    case 2:
+        // code executed for values 1 and 2
+        break;
+    default: 
+        // ...
+        break;
 }
 
 ```
@@ -590,15 +592,15 @@ switch (condition) {
 RWTLeftMenuTopItemType menuType = RWTLeftMenuTopItemMain;
 
 switch (menuType) {
-  case RWTLeftMenuTopItemMain:
-    // ...
-    break;
-  case RWTLeftMenuTopItemShows:
-    // ...
-    break;
-  case RWTLeftMenuTopItemSchedule:
-    // ...
-    break;
+    case RWTLeftMenuTopItemMain:
+        // ...
+        break;
+    case RWTLeftMenuTopItemShows:
+        // ...
+        break;
+    case RWTLeftMenuTopItemSchedule:
+        // ...
+        break;
 }
 ```
 
@@ -659,7 +661,7 @@ if (isAwesome == true) {} // Never do this.
 
 ```objc
 if (!error) {
-  return success;
+    return success;
 }
 ```
 
@@ -667,7 +669,7 @@ if (!error) {
 
 ```objc
 if (!error)
-  return success;
+    return success;
 ```
 
 或
@@ -706,11 +708,11 @@ Init方法应该遵循Apple生成代码模板的命名规则。返回类型应�
 
 ```objc
 - (instancetype)init {
-  self = [super init];
-  if (self) {
-    // ...
-  }
-  return self;
+    self = [super init];
+    if (self) {
+        // ...
+    }
+    return self;
 }
 ```
 
@@ -770,11 +772,11 @@ CGRect frame = (CGRect){ .origin = CGPointZero, .size = frame.size };
 
 ```objc
 - (void)someMethod {
-  if (![someOther boolValue]) {
-	return;
-  }
+    if (![someOther boolValue]) {
+        return;
+    }
 
-  //Do something important
+  // Do something important
 }
 ```
 
@@ -782,9 +784,9 @@ CGRect frame = (CGRect){ .origin = CGPointZero, .size = frame.size };
 
 ```objc
 - (void)someMethod {
-  if ([someOther boolValue]) {
-    //Do something important
-  }
+    if ([someOther boolValue]) {
+        // Do something important
+    }
 }
 ```
 
@@ -797,7 +799,7 @@ CGRect frame = (CGRect){ .origin = CGPointZero, .size = frame.size };
 ```objc
 NSError *error;
 if (![self trySomethingWithError:&error]) {
-  // Handle Error
+    // Handle Error
 }
 ```
 
@@ -806,7 +808,7 @@ if (![self trySomethingWithError:&error]) {
 NSError *error;
 [self trySomethingWithError:&error];
 if (error) {
-  // Handle Error
+    // Handle Error
 }
 ```
 
@@ -819,14 +821,14 @@ if (error) {
 
 ```objc
 + (instancetype)sharedInstance {
-  static id sharedInstance = nil;
+    static id sharedInstance = nil;
 
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    sharedInstance = [[self alloc] init];
-  });
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      sharedInstance = [[self alloc] init];
+    });
 
-  return sharedInstance;
+    return sharedInstance;
 }
 ```
 
@@ -843,11 +845,11 @@ if (error) {
 self.productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
 ```
 
-一行很长的代码应该分成两行代码，下一行用两个空格隔开。
+一行很长的代码应该分成两行代码，下一行用四个空格隔开。
 
 ```objc
 self.productsRequest = [[SKProductsRequest alloc] 
-  initWithProductIdentifiers:productIdentifiers];
+    initWithProductIdentifiers:productIdentifiers];
 ```
 
 <b id="xcode-project"></b>
