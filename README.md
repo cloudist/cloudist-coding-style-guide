@@ -608,6 +608,28 @@ switch (menuType) {
 @end
 ```
 
+私有控件尽量统一使用懒加载的形式并配合 ({}) 的包装来写。
+
+**例如:**
+
+```objc
+
+- (UILabel*)pullStateLabel {
+    if (_pullStateLabel) {
+        return _pullStateLabel;
+    }
+    _pullStateLabel = ({
+        UILabel* label = [[UILabel alloc] init];
+        label.text = @"test";
+        [label sizeToFit];
+        label;
+    });
+    return _pullStateLabel;
+}
+
+@end
+```
+
 <b id="booleans"></b>
 ## 布尔值
 
