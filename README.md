@@ -627,7 +627,10 @@ switch (menuType) {
     return _pullStateLabel;
 }
 
-@end
+- (void)loadUI {
+    [self.view addSubview:self.pullStateLabel];
+}
+
 ```
 
 <b id="booleans"></b>
