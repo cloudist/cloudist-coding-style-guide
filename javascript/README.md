@@ -1542,10 +1542,6 @@
 ## <a name="resources">资源</a>
 
 
-**推荐阅读**
-
-  - [Annotated ECMAScript 5.1](http://es5.github.com/)
-
 **工具**
 
   - Code Style Linters
@@ -1567,5 +1563,3 @@
   - [Multiple var statements in JavaScript, not superfluous](http://benalman.com/news/2012/05/multiple-var-statements-javascript/) - Ben Alman
 
 **[⬆ 回到顶部](#table-of-contents)**
-
-# };
