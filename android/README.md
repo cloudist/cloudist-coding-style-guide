@@ -361,14 +361,14 @@ public Observable<Location> syncLocations() {
 ### 使用自结束标签
 当一个 XML 里的元素内没有其他元素时,应该使用自结束标签
 这是正确的:
-```Java
+```xml
 <TextView
     android:id="@+id/text_view_profile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 ```
 这是错误的:
-```Java
+```xml
 <!-- Don\'t do this! -->
 <TextView
     android:id="@+id/text_view_profile"
