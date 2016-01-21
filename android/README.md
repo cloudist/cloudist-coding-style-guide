@@ -388,7 +388,7 @@ ID 应该已控件的名称作为前缀来命名.例如:
 | `Button`             | `button_`           |
 | `Menu`               | `menu_`             |
 ImageView 例子:
-```Java
+```xml
 <ImageView
     android:id="@+id/image_profile"
     android:layout_width="wrap_content"
@@ -396,7 +396,7 @@ ImageView 例子:
 
 ```
 Menu 例子:
-```Java
+```xml
 <menu>
     <item
         android:id="@+id/menu_done"
