@@ -416,10 +416,10 @@ Menu 例子:
 不同于其他的资源命名规范, Style 中的名字应该遵循[驼峰命名法](http://baike.baidu.com/link?url=36TNYWM87ZKQKN5r1RayLumvi7wqv3vmVcgi7eicJVD4VpbpNyMUp443RFJ4coFeosuNIg1TZny2p9fTTlpOva)
 #### Color
 color 中颜色的命名应该遵循**小写 + 下划线**的格式
-### 提供 Android 性能的编码规范
+### 提高 Android 性能的编码规范
 #### 不要在 Android 程序里使用 enum
-虽然使用 enum 很方便,但是会比使用静态变量产生多于两倍的内存消耗,所以 Android 官方强烈建议不要在Android程序里面使用到enum.
-使用 Android Typedef Annotations 可以代替 enum, 具体的使用发放请参考[这里](http://tools.android.com/tech-docs/support-annotations)
+虽然使用 enum 很方便,但是会比使用静态变量产生多于两倍的内存消耗,所以 Android 官方强烈建议不要在Android程序里面使用到 enum.
+使用 Android Typedef Annotations 可以代替 enum, 具体的使用方法请参考[这里](http://tools.android.com/tech-docs/support-annotations)
 #### 关于数组遍历
 ```Java
 static class Foo {
@@ -454,7 +454,7 @@ public void two() {
     }
 }
 ```
-`zero()` 是最慢的方法,因为 JIT 还不能对当数组进行遍历时每次都要去获得数组的长度进行优化.
-`one()` 更快一点, 因为它所有的数据都拿出来存放在局部变量里,避免了查找.只有提供了数组的长度对性能有了一定的提升
-`two()` 在没有 JIT 的设备里是最快的,在有 JIT 的设备里于**one()**难已分上线.它使用了 Java 1.5 版本中的增强版语法
+- `zero()` 是最慢的方法,因为 JIT 还不能对当数组进行遍历时每次都要去获得数组的长度进行优化.
+- `one()` 更快一点, 因为它所有的数据都拿出来存放在局部变量里,避免了查找.只有提供了数组的长度对性能有了一定的提升
+- `two()` 在没有 JIT 的设备里是最快的,在有 JIT 的设备里于**one()**难已分上线.它使用了 Java 1.5 版本中的增强版语法
  所以应该默认使用**增强版的 for** 循环.
