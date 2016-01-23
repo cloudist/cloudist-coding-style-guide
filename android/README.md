@@ -157,7 +157,8 @@ if (condition)
 根据 Android 官方文档, 在 Java 中对于一些预先确定的注解的标准应用如下
 - `@Override`: 该注解**必须用与**任何时候想要重写或者实现父类的某个方法的时候. 例如,当你使用了 `@inheritDocs` 标签,并且是源于一个类而并不是接口的时候,你必须同时也在此方法上加上 `@Override` 标签.
 - `@SuppressWarnings`: 该标签只有在遇到无法忽略的警告的条件下才可以使用. 如果一个警告符合"无法忽略掉"的条件时,该标签是必须需要被使用的,为的是保证所有的警告都能反映出代码中实际存在的问题.
-更多关于注解的规范请参考[这里](http://source.android.com/source/code-style.html#use-standard-java-annotations)  
+更多关于注解的规范请参考[这里](http://source.android.com/source/code-style.html#use-standard-java-annotations)
+
 ##### 注解格式
 - 类,方法和构造函数: 当注解被用于类,方法和构造函数的时候,应该将注解位于注释的下面,并且每个注解作为一行的形式.如下所示
 ```Java
