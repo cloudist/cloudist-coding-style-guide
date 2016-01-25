@@ -2,7 +2,7 @@
 ### 文件的命名
 #### 类的命名
 命名应该遵循[驼峰命名法](http://baike.baidu.com/link?url=36TNYWM87ZKQKN5r1RayLumvi7wqv3vmVcgi7eicJVD4VpbpNyMUp443RFJ4coFeosuNIg1TZny2p9fTTlpOva)
-对于继承自 Android 组件的类来说，命名是应以改组件的名称结尾；例如： `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`。
+对于继承自 Android 组件的类来说，命名应以该组件的名称结尾；例如： `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`。
 #### Res 中文件的命名
 资源文件应该以小写 + 下划线( _ )的格式命名。
 ##### 图片文件
@@ -93,9 +93,9 @@ try {
 ### Java 风格规范
 ####  变量的定义与命名
 变量应该定义在文件头部的位置,并且应该遵循以下的命名规则.
-- Private, 非静态变量应该已 **m** 开头命名
-- Private, 静态变量应该已 **s** 开头命名
-- 其余的变量应该已小写字母开头
+- Private, 非静态变量应该以 **m** 开头命名
+- Private, 静态变量应该以 **s** 开头命名
+- 其余的变量应该以小写字母开头
 - 静态的常量应该都是以大写字母加下划线的格式命名. 例如, `ALL_CAPS_WITH_UNDERSCORES`.
 例子如下
 ```Java
@@ -155,9 +155,10 @@ if (condition)
 #### 注解
 ##### 注解的应用
 根据 Android 官方文档, 在 Java 中对于一些预先确定的注解的标准应用如下
-- `@Override`: 该注解**必须用与**任何时候想要重写或者实现父类的某个方法的时候. 例如,当你使用了 `@inheritdocs` 标签,并且是源于一个类而并不是接口的时候,你必须同时也在此方法上加上 `@Override` 标签.
+- `@Override`: 该注解**必须用与**任何时候想要重写或者实现父类的某个方法的时候. 例如,当你使用了 `@inheritDocs` 标签,并且是源于一个类而并不是接口的时候,你必须同时也在此方法上加上 `@Override` 标签.
 - `@SuppressWarnings`: 该标签只有在遇到无法忽略的警告的条件下才可以使用. 如果一个警告符合"无法忽略掉"的条件时,该标签是必须需要被使用的,为的是保证所有的警告都能反映出代码中实际存在的问题.
 更多关于注解的规范请参考[这里](http://source.android.com/source/code-style.html#use-standard-java-annotations)
+
 ##### 注解格式
 - 类,方法和构造函数: 当注解被用于类,方法和构造函数的时候,应该将注解位于注释的下面,并且每个注解作为一行的形式.如下所示
 ```Java
@@ -293,7 +294,7 @@ public static UserFragment newInstance(User user) {
 **注意 1**:此类方法应该声明在类的前部, `onCreate()` 方法之前
 **注意 2**:如果我们已经声明了以上的方法,那么为 Intent 或 Bundle 声明的 `Key` 应该是 `private`, 因为不需要类之外来使用.
 #### 行长度的限制
-一行代码的长度不应该超过** 100 个字符**,如果一行代码过长,通常有如下两种方法来减少代码的长度:
+一行代码的长度不应该超过**100 个字符**,如果一行代码过长,通常有如下两种方法来减少代码的长度:
 - 提取出一个`局部变量`或`方法`**(推荐)**
 - 通过换行将一行代码变为多行
 
@@ -369,7 +370,7 @@ public Observable<Location> syncLocations() {
 ```
 这是错误的:
 ```xml
-<!-- Don\'t do this! -->
+<!-- Don't do this! -->
 <TextView
     android:id="@+id/text_view_profile"
     android:layout_width="wrap_content"
@@ -379,7 +380,7 @@ public Observable<Location> syncLocations() {
 ### 资源的命名
 资源的 ID 和名称都应该是**小写 + 下划线**的格式
 #### ID 的命名
-ID 应该已控件的名称作为前缀来命名.例如:
+ID 应该以控件的名称作为前缀来命名.例如:
 
 | Element            | Prefix            |
 | -----------------  | ----------------- |
@@ -404,7 +405,7 @@ Menu 例子:
 </menu>
 ```
 ##### 字符串
-字符串的名字应该已一个可以标明其所属领域的前缀来做开头. 例如, `registration_email_hint` 或 `registration_name_hint`.如果一个字符串不属于任何的领域,那应该遵循以下规则:
+字符串的名字应该以一个可以标明其所属领域的前缀来做开头. 例如, `registration_email_hint` 或 `registration_name_hint`.如果一个字符串不属于任何的领域,那应该遵循以下规则:
 
 | Prefix             | Description                           |
 | -----------------  | --------------------------------------|
