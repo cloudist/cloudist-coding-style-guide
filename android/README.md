@@ -259,6 +259,7 @@ Android SDK 中包含很多需要键值对的元素例如, `SharedPreferences`, 
 | Fragment Arguments | `ARGUMENT_`         |
 | Intent Extra       | `EXTRA_`            |
 | Intent Action      | `ACTION_`           |
+| Handler Action     | `ACTION_`           |
 虽然 `Fragment.getArguments()` 返回的也是一个 Bundle,但是为了用于区分,所以使用 `ARGUMENT_` 作为其前缀.
 ```Java
 // Note the value of the field is the same as the name to avoid duplication issues
